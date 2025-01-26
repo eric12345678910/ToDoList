@@ -1,0 +1,22 @@
+@model List<ToDoList>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+    
+}
+
+<h2>To-Do List</h2>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thread>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thread>
+    </table>
+}

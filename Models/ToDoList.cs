@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Http.Features;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace ToDoList.Models;
 
@@ -8,9 +10,18 @@ using System.Collections.Generic;
 public class ToDoList
 {
     // Properties
+    public int ListId { get; set; }
+    [Required]
     public string Title { get; set; }
     public string Description { get; set; }
+    
+    [DataType(DataType.Date)]
     public DateTime DateCreated { get; set; }
+    
+    [DataType(DataType.Date)]
+    public DateTime DueDate { get; set; }
+    
+    public string? Status { get; set; }
     public List<ToDoItem> Items { get; private set; } = new List<ToDoItem>();
     
     // Constructor
