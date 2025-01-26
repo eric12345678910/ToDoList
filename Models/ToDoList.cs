@@ -35,7 +35,7 @@ public class ToDoList
         Console.WriteLine($"To-Do List: {Title}");
         Console.WriteLine($"Description: {Description}");
         Console.WriteLine($"Created: {DateCreated}");
-        Console.WriteLine($"Items:");
+        Console.WriteLine("Items:");
 
         foreach (var item in Items)
         {

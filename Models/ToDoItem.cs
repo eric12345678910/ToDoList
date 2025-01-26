@@ -19,4 +19,17 @@ public class ToDoItem
     }
 
     // Methods
+    public void MarkAsComplete()
+    {
+        IsCompleted = true;
+    }
+
+    public void DisplayItem()
+    {
+        Console.WriteLine($"Item Name: {Name}");
+        Console.WriteLine($"Description: {Description}");
+        Console.WriteLine($"Created: {DateCreated}");
+        Console.WriteLine($"Due: {DueDate}");
+        Console.WriteLine($"Complete: {IsCompleted}");
+    }
 }
