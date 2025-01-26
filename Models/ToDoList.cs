@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http.Features;
+
 namespace ToDoList.Models;
 
 using System;
@@ -9,6 +11,7 @@ public class ToDoList
     public string Title { get; set; }
     public string Description { get; set; }
     public DateTime DateCreated { get; set; }
+    public List<ToDoItem> Items { get; private set; } = new List<ToDoItem>();
     
     // Constructor
     public ToDoList(string title, string description)
@@ -19,6 +22,24 @@ public class ToDoList
     }
     
     // Methods
-    
-    
+    public void AddItem(ToDoItem item)
+    {
+        Items.Add(item);
+    }
+    public void RemoveItem(ToDoItem item)
+    {
+        Items.Remove(item);
+    }
+    public void DisplayList()
+    {
+        Console.WriteLine($"To-Do List: {Title}");
+        Console.WriteLine($"Description: {Description}");
+        Console.WriteLine($"Created: {DateCreated}");
+        Console.WriteLine($"Items:");
+
+        foreach (var item in Items)
+        {
+            item.DisplayItem();
+        }
+    }
 }
