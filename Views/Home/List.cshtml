@@ -1,12 +1,24 @@
+@model ToDoList
+
 @{
     // Variables
-    var listName = "List One";
+    var listName = "To Do List";
+    var listName2 = "Grocery List";
+    var listName3 = "Christmas List";
     
 }
 
-
-<div>
-    <h1>List Page</h1>
-    <p>Title: @listName</p>
-    <p></p>
+<h2>Lists</h2>
+<div class="lists">
+    <div class="list">
+        <p>Title: @listName</p>
+    </div>
+    <div class="list">
+        <p>Title: @listName2</p>
+    </div>
+    <div class="list">
+        <p>Title: @listName3</p>
+    </div>
+    
+    
 </div>
