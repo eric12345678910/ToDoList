@@ -10,6 +10,13 @@ public class ToDoItem
     public bool IsCompleted { get; private set; } = false; // Default completion status to false
 
     // Constructor
+    public ToDoItem(string name, string description, DateTime dueDate)
+    {
+        Name = name;
+        Description = description;
+        DueDate = dueDate;
+        DateCreated = DateTime.Now; // Log time created
+    }
 
     // Methods
 }
