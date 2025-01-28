@@ -1,19 +1,20 @@
 namespace ToDoList.Models;
 
-public class ToDoItem
+public class TaskItem
 {
     // Properties
+    public int TaskItemId { get; set; }
     public string Name { get; set; }
-    public string Description { get; set; }
+    
+    
     public DateTime DateCreated { get; private set; }
     public DateTime DueDate { get; set; }
     public bool IsCompleted { get; private set; } = false; // Default completion status to false
 
     // Constructor
-    public ToDoItem(string name, string description, DateTime dueDate)
+    public TaskItem(string name, string description, DateTime dueDate)
     {
         Name = name;
-        Description = description;
         DueDate = dueDate;
         DateCreated = DateTime.Now; // Log time created
     }
@@ -27,7 +28,6 @@ public class ToDoItem
     public void DisplayItem()
     {
         Console.WriteLine($"Item Name: {Name}");
-        Console.WriteLine($"Description: {Description}");
         Console.WriteLine($"Created: {DateCreated}");
         Console.WriteLine($"Due: {DueDate}");
         Console.WriteLine($"Complete: {IsCompleted}");

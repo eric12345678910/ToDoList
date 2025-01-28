@@ -33,4 +33,21 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View(new TaskList());
+    }
+
+    [HttpPost]
+    public IActionResult Create(TaskList list)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(list);
+        }
+        
+        return RedirectToAction("Index");
+    }
 }

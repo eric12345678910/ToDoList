@@ -1,19 +1,20 @@
 using Microsoft.AspNetCore.Http.Features;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace ToDoList.Models;
 
 using System;
 using System.Collections.Generic;
 
-public class ToDoList
+public class TaskList
 {
-    // Properties
+    // -----------------------------------  Properties
+
+   // public string Description { get; set; }
     public int ListId { get; set; }
-    [Required]
-    public string Title { get; set; }
-    public string Description { get; set; }
+
+    [StringLength(100)]
+    public string Title { get; set; } = string.Empty;
     
     [DataType(DataType.Date)]
     public DateTime DateCreated { get; set; }
@@ -22,29 +23,40 @@ public class ToDoList
     public DateTime DueDate { get; set; }
     
     public string? Status { get; set; }
-    public List<ToDoItem> Items { get; private set; } = new List<ToDoItem>();
+    public List<TaskItem> Items { get; set; } = new List<TaskItem>();
     
-    // Constructor
-    public ToDoList(string title, string description)
+    
+    // -----------------------------------  Constructors
+
+    public TaskList()
+    {
+        Title = string.Empty;
+    }
+    
+    public TaskList(string title)
     {
         Title = title;
-        Description = description;
+    }
+    
+    public TaskList(int listId, string title)
+    {
+        ListId = listId;
+        Title = title;
         DateCreated = DateTime.Now; // Log time created
     }
     
-    // Methods
-    public void AddItem(ToDoItem item)
+    // -----------------------------------  Methods
+    public void AddItem(TaskItem item)
     {
         Items.Add(item);
     }
-    public void RemoveItem(ToDoItem item)
+    public void RemoveItem(TaskItem item)
     {
         Items.Remove(item);
     }
     public void DisplayList()
     {
         Console.WriteLine($"To-Do List: {Title}");
-        Console.WriteLine($"Description: {Description}");
         Console.WriteLine($"Created: {DateCreated}");
         Console.WriteLine("Items:");
 

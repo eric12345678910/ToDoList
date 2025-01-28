@@ -1,0 +1,33 @@
+@model List<TaskList>
+
+
+<h2>Lists</h2>
+
+<div class="lists">
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="Title">List Title</label>
+            <input type="text" id="Title" name="Title" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Create List</button>
+    </form>
+    
+    <hr/>
+</div>
+
+<!-- TODO: iterate through lists and display -->
+
+@foreach (var list in Model)
+{
+    <div class="list">
+        <h3>list.Title</h3>
+        <ul>
+            @foreach (var item in list.Items)
+            {
+                <li>@item.Name</li>
+            }
+        </ul>
+        
+    </div>
+}
+
