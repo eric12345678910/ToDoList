@@ -10,9 +10,10 @@ public class ProjectController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        return View(_taskLists);
+        return View(_taskLists); // Output all task lists
     }
     
+    // Form to create a new list
     [HttpGet]
     public IActionResult Create()
     {
@@ -22,11 +23,23 @@ public class ProjectController : Controller
     [HttpPost]
     public IActionResult Create(TaskList list)
     {
-        list.ListId = _taskLists.Count + 1;
+        list.ListId = _taskLists.Count + 1; // Generate unique ID
         _taskLists.Add(list);
-        
         return RedirectToAction("Index");
     }
+    
+    [HttpGet]
+    public IActionResult TaskList(int listId)
+    {
+        var list = _taskLists.FirstOrDefault(l => l.ListId == listId);
+        if (list == null)
+        {
+            return NotFound();
+        }
+        return View(//list //
+                    );
+    }
+ 
 
     [HttpGet]
     public IActionResult AddItem(int listId)
@@ -36,7 +49,6 @@ public class ProjectController : Controller
         {
             return NotFound();
         }
-
         return View(list);
     }
 
