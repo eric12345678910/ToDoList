@@ -18,6 +18,14 @@ public class TaskItem
         DueDate = dueDate;
         DateCreated = DateTime.Now; // Log time created
     }
+    
+    public TaskItem(string name)
+    {
+        Name = name;
+        DateCreated = DateTime.Now; // Log time created
+    }
+    
+    
 
     // Methods
     public void MarkAsComplete()

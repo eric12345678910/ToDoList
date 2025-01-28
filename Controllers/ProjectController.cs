@@ -50,7 +50,7 @@ public class ProjectController : Controller
         }
         
         // Add item to list
-        var newItem = new TaskItem { Name = itemName };
+        var newItem = new TaskItem( itemName );
         list.Items.Add(newItem);
 
         return RedirectToAction("Index");
