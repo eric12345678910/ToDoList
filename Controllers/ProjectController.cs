@@ -3,6 +3,8 @@ namespace ToDoList.Controllers;
 using ToDoList.Models;
 using Microsoft.AspNetCore.Mvc;
 
+
+
 public class ProjectController : Controller
 {
     private static List<TaskList> _taskLists = new List<TaskList>();
@@ -21,11 +23,16 @@ public class ProjectController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(TaskList list)
+    [ValidateAntiForgeryToken]
+    public IActionResult Create(TaskList taskList)
     {
-        list.ListId = _taskLists.Count + 1; // Generate unique ID
-        _taskLists.Add(list);
-        return RedirectToAction("Index");
+        if (ModelState.IsValid)
+        {
+            taskList.ListId = _taskLists.Count + 1; // Generate unique ID
+            _taskLists.Add(taskList);
+            return RedirectToAction("Index");
+        }
+        return View(taskList); // Redirect back if model is not valid
     }
     
     [HttpGet]
@@ -36,8 +43,9 @@ public class ProjectController : Controller
         {
             return NotFound();
         }
-        return View(//list //
-                    );
+        // //////////////////////////////////////// Debugging 
+        Console.WriteLine($"List Found: {list.Title}");
+        return View(list);
     }
  
 
@@ -53,6 +61,7 @@ public class ProjectController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult AddItem(int listId, string itemName)
     {
         var list = _taskLists.FirstOrDefault(l => l.ListId == listId);
@@ -60,12 +69,17 @@ public class ProjectController : Controller
         {
             return NotFound();
         }
-        
-        // Add item to list
-        var newItem = new TaskItem( itemName );
-        list.Items.Add(newItem);
 
-        return RedirectToAction("Index");
+        if (string.IsNullOrWhiteSpace(itemName))
+        {
+            ModelState.AddModelError("", "Item name cannot be empty.");
+            return View(list);
+        }
+        
+        
+        list.Items.Add(new TaskItem(itemName));
+
+        return RedirectToAction("TaskList", new{listId});
     }
 }
 

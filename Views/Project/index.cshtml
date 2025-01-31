@@ -1,21 +1,35 @@
-@model List<TaskList>
+@using System.Net
+@model List<ToDoList.Models.TaskList>
+<h4>Project/index.cshtml</h4>
 
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-    
-}
 
 <h2>To-Do List</h2>
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="Title">List Title</label>
+        <input type="text" id="Title" name="Title" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Create List</button>
+</form>
 
+<hr/>
+
+<!-- Display all lists -->
 @if (Model.Any())
 {
-    <table class="table">
-        <thread>
-            <ul>
-                <li>@Model</li>
-                <li>@Model</li>
-            </ul>
-        </thread>
-    </table>
+    @foreach (var list in Model)
+    {
+        <div class="task-list">
+            <h3>@list.Title</h3>
+            <p>Number of Items: @list.Items.Count</p>
+        
+            <a href="@Url.Action("TaskList", "Project", new{listId = list.ListId })">View Tasks</a>
+        </div>
+    }
 }
+
+
+
+
+
+

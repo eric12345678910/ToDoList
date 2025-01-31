@@ -1,35 +1,29 @@
-@model List<TaskList>
+@model ToDoList.Models.TaskList
+
+<h4>Project/TaskList.cshtml</h4>
+
+<h2>@Model.Title</h2>
+<hr/>
 
 
-<h2>Lists</h2>
-
-<div class="lists">
-    <form asp-action="Create" method="post">
-        <div class="form-group">
-            <label for="Title">List Title</label>
-            <input type="text" id="Title" name="Title" class="form-control" required />
-        </div>
-        <button type="submit" class="btn btn-primary">Create List</button>
-    </form>
+<ul>
+    @foreach (var item in Model.Items)
+    {
+        <li>@item.Name</li>
+    }
+</ul>
     
-    <hr/>
-</div>
-
-<!-- TODO: iterate through lists and display -->
-
-@foreach (var list in Model)
-{
-    <div class="list">
-        <h3>list.Title</h3>
-        <ul>
-            @foreach (var item in list.Items)
-            {
-                <li>@item.Name</li>
-            }
-        </ul>
-
-        <!-- TODO: add button to add new item to list -->
-        
+<!-- Add new task -->
+<form asp-action="AddItem" asp-route-listId="@Model.ListId" method="post">
+    <div class="form-group">
+        <label for="itemName">New Task</label>
+        <input type="text" id="itemName" name="itemName" class="form-control" required/>
     </div>
+    <button type="submit" class="btn btn-primary">add to list</button>
+</form>
+
+<hr/>
+
+
 }
 
