@@ -2,14 +2,17 @@
 
 <h4>Project/TaskList.cshtml</h4>
 
+<!-- List Name --> 
 <h2>@Model.Title</h2>
 <hr/>
 
 
 <ul>
+    <!-- List Item Iteration -->
     @foreach (var item in Model.Items)
     {
         <li>@item.Name</li>
+        
     }
 </ul>
     

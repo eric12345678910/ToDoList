@@ -32,7 +32,14 @@
 
             </ul>
             
-            <!-- /////////////////////////////// -->
+            <!-- Add item to task list -->
+            <form asp-action="AddItem" asp-route-listId="@list.ListId" method="post">
+                <div class="form-group">
+                    <label for="itemName">New Task</label>
+                    <input type="text" id="itemName" name="itemName" class="form-control" required/>
+                </div>
+                <button type="submit" class="btn btn-primary">add to list</button>
+            </form>
         
             <a href="@Url.Action("TaskList", "Project", new{listId = list.ListId })">View Tasks</a>
         </div>
