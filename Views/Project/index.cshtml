@@ -23,14 +23,27 @@
             <h3>@list.Title</h3>
             <p>Number of Items: @list.Items.Count</p>
         
-            <!-- TODO: output tasks to main page --> 
-            <ul class="item_list">
-                @foreach(var task in @list.Items)
-                {
-                    <li>@task.Name</li>
-                }
+            <!-- Output tasks to main page --> 
+            <section class="listItems">
+                <ul class="item_list">
+                    for each task in list.Items:
+                    @foreach (var task in @list.Items)
+                    {
+                        <form asp-action="addItem" asp-route-listId="@list.ListId" method="post">
+                            <!-- Debugging: output info for clarity --> 
+                            <div>List ID: @list.ListId</div>
+                            <div>List Title: @list.Title</div>
+                            <div>List Date Created: @list.DateCreated</div> <!-- error: date initializing as 1st of jan -->
 
-            </ul>
+                            <!-- TODO: Handle each item option as form to check/uncheck itself  -->
+                            <div class="item-group">
+                                <label for="item">@task.Name</label>
+                                <input type="hidden" id="item" name="item" class="form-control">
+                            </div>
+                        </form>
+                    }
+                </ul>
+            </section>
             
             <!-- Add item to task list -->
             <form asp-action="AddItem" asp-route-listId="@list.ListId" method="post">
@@ -40,6 +53,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">add to list</button>
             </form>
+            
         
             <a href="@Url.Action("TaskList", "Project", new{listId = list.ListId })">View Tasks</a>
         </div>
